@@ -98,7 +98,7 @@ function updateSummary() {
   document.getElementById('sum-others-label').textContent = `Others × ${q.counts.others}`;
   document.getElementById('sum-adult').textContent = naira(q.counts.adult * PRICES[q.tier].adult);
   document.getElementById('sum-others').textContent = naira(q.counts.others * PRICES[q.tier].others);
-  document.getElementById('sum-fee').textContent = naira(q.fee);
+  // document.getElementById('sum-fee').textContent = naira(q.fee);
   document.getElementById('sum-total').textContent = naira(q.total);
   payBtn.textContent = q.total ? `Pay ${naira(q.total)}` : 'Proceed to Payment';
 }
@@ -152,7 +152,7 @@ form.addEventListener('submit', async (e) => {
   payBtn.disabled = true;
   addBtn.disabled = true;
   const label = payBtn.textContent;
-  payBtn.textContent = 'Connecting to Paystack…';
+  payBtn.textContent = 'Processing...';
 
   try {
     const res = await fetch('/api/initialize', {

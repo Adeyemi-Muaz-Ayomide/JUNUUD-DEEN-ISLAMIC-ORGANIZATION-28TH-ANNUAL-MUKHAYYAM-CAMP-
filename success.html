@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registration Confirmation | 28th Annual Mukhayyam</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0F6B22">
+  <link rel="icon" href="/assets/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Anton&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/success.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">
+      <img src="/assets/logo.jpg" alt="" width="44" height="40">
+      <span>Junuud Deen<br><small>Islamic Organization</small></span>
+    </a>
+  </header>
+
+  <main class="receipt-wrap">
+    <section id="loading" class="state">
+      <div class="spinner" aria-hidden="true"></div>
+      <h1>Confirming your payment…</h1>
+      <p>Please don't close this page.</p>
+    </section>
+
+    <section id="pending" class="state" hidden>
+      <h1>Payment not confirmed yet</h1>
+      <p id="pending-text">We haven't received confirmation from Paystack yet. This can take a few seconds.</p>
+      <div class="actions">
+        <button class="btn" type="button" id="retry">Check again</button>
+        <a class="btn btn-ghost" href="/#register">Back to registration</a>
+      </div>
+    </section>
+
+    <section id="failed" class="state" hidden>
+      <h1>Payment was not completed</h1>
+      <p>No money was taken for this attempt. You can register again below.</p>
+      <div class="actions"><a class="btn" href="/#register">Try again</a></div>
+    </section>
+
+    <section id="error" class="state" hidden>
+      <h1>Something went wrong</h1>
+      <p id="error-text"></p>
+      <div class="actions"><a class="btn" href="/">Go to home page</a></div>
+    </section>
+
+    <article id="receipt" class="receipt" hidden>
+      <div class="receipt-head">
+        <img src="/assets/logo.jpg" alt="Junuud Deen Islamic Organization logo" width="90" height="80">
+        <div>
+          <p class="arabic" lang="ar" dir="rtl">جمعية جنود الدين الإسلامية</p>
+          <p class="org">Junuud Deen Islamic Organization</p>
+          <p class="r-event">28th Annual Mukhayyam [Camp]</p>
+        </div>
+      </div>
+
+      <div class="paid-banner">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2Z"/></svg>
+        <div>
+          <h1>Registration Confirmed</h1>
+          <p>Jazakumullahu khayran, <span id="r-payer"></span>. See you at camp, in shaa Allah!</p>
+        </div>
+      </div>
+
+      <dl class="r-meta">
+        <div><dt>Payment reference</dt><dd id="r-ref"></dd></div>
+        <div><dt>Date paid</dt><dd id="r-date"></dd></div>
+        <div><dt>Receipt sent to</dt><dd id="r-email"></dd></div>
+        <div><dt>Venue</dt><dd>Linksbond College, Ewu Elepe, Igbe Laara, Ikorodu, Lagos</dd></div>
+        <div><dt>Camp dates</dt><dd>24th December 2026 – 1st January 2027</dd></div>
+      </dl>
+
+      <table class="r-table">
+        <thead><tr><th>Registration ID</th><th>Name</th><th>Category</th><th class="num">Fee</th></tr></thead>
+        <tbody id="r-rows"></tbody>
+        <tfoot>
+          <tr><td colspan="3">Paystack charge</td><td class="num" id="r-fee"></td></tr>
+          <tr class="r-total"><td colspan="3">Total paid</td><td class="num" id="r-total"></td></tr>
+        </tfoot>
+      </table>
+
+      <p class="r-note">Please keep your Registration ID(s). You may be asked for them at the camp.</p>
+
+      <div class="actions no-print">
+        <button class="btn" type="button" onclick="window.print()">Print / Save receipt</button>
+        <a class="btn btn-ghost" href="/">Back to home</a>
+      </div>
+    </article>
+  </main>
+
+  <script type="module" src="/success.js"></script>
+</body>
+</html>

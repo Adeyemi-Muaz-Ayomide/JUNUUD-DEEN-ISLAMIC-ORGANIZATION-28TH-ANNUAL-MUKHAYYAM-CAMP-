@@ -1,0 +1,8 @@
+{
+  "name": "junuud-deen-mukhayyam-28",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  }
+}

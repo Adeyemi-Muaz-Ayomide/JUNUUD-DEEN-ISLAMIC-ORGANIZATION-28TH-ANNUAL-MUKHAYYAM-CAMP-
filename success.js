@@ -31,6 +31,7 @@ function renderReceipt(data) {
     })
   );
   document.getElementById('r-fee').textContent = naira(data.fee);
+  document.getElementById('r-fee-row').hidden = !data.fee;
   document.getElementById('r-total').textContent = naira(data.total);
   show('receipt');
 }

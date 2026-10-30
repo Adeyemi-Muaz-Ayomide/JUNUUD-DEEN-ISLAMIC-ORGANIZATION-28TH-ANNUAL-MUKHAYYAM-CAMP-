@@ -64,8 +64,19 @@
         </div>
 
         <p class="headline" id="headline">Early Birds Payment Is Live!</p>
-        <p class="countdown" id="countdown">Add countdown</p>
-        <!-- <p class="countdown" id="countdown"></p> -->
+        <div class="countdown" id="countdown" hidden>
+          <p class="countdown-label">Early bird ends in</p>
+          <div class="countdown-units" role="timer" aria-live="off">
+            <div class="unit"><span class="num" id="cd-days">00</span><span class="lbl">Days</span></div>
+            <span class="sep" aria-hidden="true">:</span>
+            <div class="unit"><span class="num" id="cd-hours">00</span><span class="lbl">Hours</span></div>
+            <span class="sep" aria-hidden="true">:</span>
+            <div class="unit"><span class="num" id="cd-mins">00</span><span class="lbl">Minutes</span></div>
+            <span class="sep" aria-hidden="true">:</span>
+            <div class="unit"><span class="num" id="cd-secs">00</span><span class="lbl">Seconds</span></div>
+          </div>
+          <p class="countdown-date">Thursday, 4th December 2026 · 11:59 PM</p>
+        </div>
 
         <div class="hero-actions">
           <a class="btn" href="#register">Register Now</a>

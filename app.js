@@ -22,11 +22,35 @@ if (tier === 'regular') {
   document.getElementById('old-others').hidden = true;
   document.getElementById('fees-label').textContent = 'Camp Fee';
   document.getElementById('headline').textContent = 'Registration Is Open!';
-  document.getElementById('fees-note').textContent = 'A small Paystack processing charge is added at checkout.';
+  document.getElementById('fees-note').textContent = 'Register early to secure your spot.';
 } else {
-  const days = Math.ceil((EARLY_BIRD_ENDS - new Date()) / 86400000);
-  document.getElementById('countdown').textContent =
-    days <= 1 ? 'Early bird ends today!' : `Early bird ends in ${days} days — 4th December 2026`;
+  startCountdown();
+}
+
+// Live countdown to the end of the early-bird period.
+function startCountdown() {
+  const box = document.getElementById('countdown');
+  const els = ['cd-days', 'cd-hours', 'cd-mins', 'cd-secs'].map((id) => document.getElementById(id));
+  const pad = (n) => String(n).padStart(2, '0');
+  box.hidden = false;
+
+  function tick() {
+    const left = EARLY_BIRD_ENDS - Date.now();
+    if (left <= 0) {
+      // Early bird is over: reload so regular prices show.
+      clearInterval(timer);
+      location.reload();
+      return;
+    }
+    const secs = Math.floor(left / 1000);
+    const values = [Math.floor(secs / 86400), Math.floor(secs / 3600) % 24, Math.floor(secs / 60) % 60, secs % 60];
+    values.forEach((v, i) => {
+      const text = pad(v);
+      if (els[i].textContent !== text) els[i].textContent = text;
+    });
+  }
+  const timer = setInterval(tick, 1000);
+  tick();
 }
 
 // ---------- Participants ----------
@@ -173,6 +197,16 @@ form.addEventListener('submit', async (e) => {
   payBtn.disabled = false;
   addBtn.disabled = list.children.length >= MAX_PARTICIPANTS;
   payBtn.textContent = label;
+});
+
+// When someone presses Back from Paystack, the browser may restore this page exactly as it
+// was left, with the button stuck on "Processing...". Reset it so they can try again.
+window.addEventListener('pageshow', (e) => {
+  if (!e.persisted) return;
+  payBtn.disabled = false;
+  addBtn.disabled = list.children.length >= MAX_PARTICIPANTS;
+  setError('');
+  updateSummary();
 });
 
 // Show the full category name on the summary for clarity.

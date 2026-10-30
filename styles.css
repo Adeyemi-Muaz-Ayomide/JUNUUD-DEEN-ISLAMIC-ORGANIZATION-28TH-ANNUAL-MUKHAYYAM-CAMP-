@@ -212,10 +212,61 @@ textarea:focus-visible {
   margin: 2rem 0 0.4rem;
 }
 .countdown {
+  margin: 1.4rem auto 0;
+}
+.countdown-label,
+.countdown-date {
   margin: 0;
-  font-weight: 700;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
   color: var(--muted);
-  min-height: 1.5em;
+}
+.countdown-date {
+  margin-top: 0.7rem;
+  letter-spacing: 0.04em;
+}
+.countdown-units {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: clamp(0.3rem, 1.5vw, 0.7rem);
+  margin-top: 0.7rem;
+}
+.unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+.unit .num {
+  display: block;
+  min-width: clamp(3.6rem, 15vw, 5.2rem);
+  padding: 0.55rem 0.4rem 0.45rem;
+  background: var(--ink);
+  color: #fff;
+  font-family: var(--display);
+  font-size: clamp(2rem, 8vw, 3.2rem);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  border-radius: 10px;
+  border-bottom: 4px solid var(--green);
+  box-shadow: 0 6px 16px rgba(29, 35, 30, 0.18);
+}
+.unit .lbl {
+  font-weight: 800;
+  font-size: clamp(0.62rem, 2.2vw, 0.75rem);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--green-deep);
+}
+.sep {
+  font-family: var(--display);
+  font-size: clamp(1.6rem, 6vw, 2.6rem);
+  line-height: 1;
+  padding-top: 0.6rem;
+  color: var(--green);
 }
 .hero-actions {
   display: flex;

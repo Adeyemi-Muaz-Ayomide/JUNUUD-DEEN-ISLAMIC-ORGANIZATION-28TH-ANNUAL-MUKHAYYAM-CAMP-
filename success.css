@@ -56,8 +56,27 @@
 
 @media (max-width: 560px) {
   .r-meta { grid-template-columns: 1fr; }
-  .r-table { font-size: .85rem; }
-  .r-table th, .r-table td { padding: .55rem .4rem; }
+  /* Stack each participant as a card instead of a wide table. */
+  .r-table, .r-table tbody, .r-table tfoot { display: block; }
+  .r-table thead { display: none; }
+  .r-table tbody tr {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "code fee" "name name" "cat cat";
+    gap: .15rem .8rem;
+    padding: .8rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .r-table tbody td { padding: 0; border: 0; }
+  .r-table tbody td:nth-child(1) { grid-area: code; }
+  .r-table tbody td:nth-child(2) { grid-area: name; font-weight: 700; overflow-wrap: anywhere; }
+  .r-table tbody td:nth-child(3) { grid-area: cat; font-size: .85rem; color: var(--muted); }
+  .r-table tbody td:nth-child(4) { grid-area: fee; font-weight: 700; }
+  .r-table tfoot tr { display: flex; justify-content: space-between; gap: 1rem; }
+  .r-table tfoot tr[hidden] { display: none; }
+  .r-table tfoot td { padding: .65rem 0; }
+  .r-table .r-total td { border-top: 0; }
+  .r-table .r-total { border-top: 2px solid var(--ink); }
 }
 
 @media print {

@@ -402,6 +402,13 @@ textarea:focus-visible {
   gap: 1.5rem;
   align-items: start;
 }
+/* The "Participant 1" pill overlaps the top edge of the white card, so the card's
+   visible edge starts half a pill lower. Line the black summary up with that edge. */
+@media (min-width: 901px) {
+  .form-layout .summary {
+    margin-top: 1rem;
+  }
+}
 
 .participant {
   margin: 0 0 1.2rem;
@@ -491,6 +498,60 @@ textarea:focus {
 }
 .err:empty {
   display: none;
+}
+.cat-note {
+  color: var(--danger);
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+.cat-note::before {
+  content: "\26A0\FE0E  ";
+}
+
+/* "Must finish" warning under the Register heading */
+.must-finish {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  max-width: 760px;
+  margin: 0 auto 2.2rem;
+  padding: 1rem 1.2rem;
+  background: #fdecea;
+  border: 2px solid var(--danger);
+  border-left-width: 8px;
+  border-radius: 12px;
+  color: #5c1410;
+}
+.must-finish svg {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  fill: var(--danger);
+}
+.must-finish p {
+  margin: 0;
+  line-height: 1.55;
+}
+.must-finish .must-title {
+  margin-bottom: 0.25rem;
+  color: var(--danger);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.must-finish strong {
+  font-weight: 800;
+}
+.pay-reminder {
+  margin: 0;
+  padding: 0.55rem 0.7rem;
+  background: rgba(179, 38, 30, 0.18);
+  border: 1px solid rgba(255, 140, 130, 0.55);
+  border-radius: 8px;
+  color: #ffd9d5;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: center;
 }
 
 .summary {

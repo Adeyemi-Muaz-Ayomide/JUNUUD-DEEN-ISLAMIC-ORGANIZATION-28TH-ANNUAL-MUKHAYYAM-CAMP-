@@ -74,7 +74,8 @@ export async function confirmPayment(reference) {
     return getRegistration(reference);
   }
 
-  if (['failed', 'abandoned', 'reversed'].includes(tx.status)) {
+  // "abandoned" can also mean a bank transfer that hasn't landed yet, so it stays pending.
+  if (['failed', 'reversed'].includes(tx.status)) {
     await db(`registrations?reference=eq.${encodeURIComponent(reference)}&status=eq.pending`, {
       method: 'PATCH',
       body: { status: 'failed' },

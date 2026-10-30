@@ -42,29 +42,39 @@ function renderReceipt(data) {
   show('receipt');
 }
 
+// While a payment is pending (e.g. bank transfer), check again every 5 seconds for
+// about 3 minutes, then leave it to the "Check again" button.
+const AUTO_CHECKS = 36;
 let attempts = 0;
-async function check() {
-  show('loading');
+let timer;
+
+async function check({ silent = false } = {}) {
+  clearTimeout(timer);
+  if (!silent) show('loading');
   attempts += 1;
+  const note = document.getElementById('pending-text');
   try {
     const res = await fetch(`/api/verify?reference=${encodeURIComponent(reference)}`);
     const data = await res.json().catch(() => ({}));
-    if (res.status >= 500) {
-      document.getElementById('pending-text').textContent = data.error || 'Please check again in a moment.';
-      return show('pending');
-    }
-    if (!res.ok) {
+    if (res.status < 500 && !res.ok) {
       document.getElementById('error-text').textContent = data.error || 'Please try again.';
       return show('error');
     }
     if (data.status === 'paid') return renderReceipt(data);
     if (data.status === 'failed') return show('failed');
-    // Still pending: retry automatically a few times before asking the user.
-    if (attempts < 4) return setTimeout(check, 2500);
-    show('pending');
+    note.textContent = res.ok ? '' : data.error || 'We could not reach the server.';
   } catch {
-    document.getElementById('pending-text').textContent = 'Network error. Check your connection and try again.';
-    show('pending');
+    note.textContent = 'Network error. Check your connection.';
+  }
+
+  // Still pending (or a temporary error).
+  show('pending');
+  const time = new Date().toLocaleTimeString('en-NG', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  if (attempts < AUTO_CHECKS) {
+    note.textContent = `${note.textContent} Last checked ${time}. Checking again automatically…`.trim();
+    timer = setTimeout(() => check({ silent: true }), 5000);
+  } else {
+    note.textContent = `${note.textContent} Last checked ${time}. Press "Check again" to refresh.`.trim();
   }
 }
 
@@ -72,6 +82,8 @@ document.getElementById('retry').addEventListener('click', () => {
   attempts = 0;
   check();
 });
+
+document.getElementById('pending-ref').textContent = reference;
 
 if (reference) {
   check();

@@ -53,7 +53,7 @@ export async function POST(request) {
 
     await db('participants', {
       method: 'POST',
-      body: participants.map((p) => ({
+      body: participants.map(({ first_name, last_name, ...p }) => ({
         ...p,
         email: p.email || null,
         phone: p.phone || null,

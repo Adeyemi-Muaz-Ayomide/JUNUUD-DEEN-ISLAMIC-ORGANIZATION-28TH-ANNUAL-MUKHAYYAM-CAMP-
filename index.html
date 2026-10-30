@@ -136,6 +136,19 @@
           </p>
         </div>
 
+        <div class="must-finish" role="note">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 1 21h22L12 2Zm1 15h-2v-2h2v2Zm0-4h-2V9h2v4Z"/></svg>
+          <div>
+            <p class="must-title">Important: please complete every step</p>
+            <p>
+              After paying on Paystack, <strong>wait to be brought back to this
+              website and do not close the page until your receipt appears.</strong>
+              Your receipt and Registration ID are your proof of registration and
+              will be required at the camp. Kindly print it or take a screenshot.
+            </p>
+          </div>
+        </div>
+
         <form id="reg-form" novalidate>
           <div class="form-layout">
             <div id="participants"></div>
@@ -171,6 +184,9 @@
                 Proceed to Payment
               </button>
               <p class="form-error" id="form-error" role="alert" hidden></p>
+              <p class="pay-reminder">
+                After paying, wait for your receipt to be generated.
+              </p>
               <p class="secure">Payments are processed securely by Paystack.</p>
             </aside>
           </div>
@@ -213,15 +229,27 @@
           </button>
         </legend>
         <div class="grid">
-          <label class="span-2"
-            >Full name
+          <label
+            >First name
             <input
-              name="full_name"
+              name="first_name"
               type="text"
-              autocomplete="name"
-              maxlength="80"
+              autocomplete="given-name"
+              maxlength="40"
               data-filter="letters"
-              placeholder="e.g. Abdullah Yusuf"
+              placeholder="e.g. Abdullah"
+            />
+            <small class="err"></small>
+          </label>
+          <label
+            >Last name
+            <input
+              name="last_name"
+              type="text"
+              autocomplete="family-name"
+              maxlength="40"
+              data-filter="letters"
+              placeholder="e.g. Yusuf"
             />
             <small class="err"></small>
           </label>
@@ -266,6 +294,10 @@
               <option value="others">Others (Students &amp; Children)</option>
             </select>
             <small class="err"></small>
+            <small class="cat-note" hidden
+              >Students will be asked to show a valid student ID card at the
+              campsite for confirmation.</small
+            >
           </label>
           <p class="sub span-2">Emergency contact</p>
           <label

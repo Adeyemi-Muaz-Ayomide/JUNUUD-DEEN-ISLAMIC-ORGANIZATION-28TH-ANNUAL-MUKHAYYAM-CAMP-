@@ -28,13 +28,34 @@
       <p>Please don't close this page.</p>
     </section>
 
-    <section id="pending" class="state" hidden>
-      <h1>Payment not confirmed yet</h1>
-      <p id="pending-text">We haven't received confirmation from Paystack yet. This can take a few seconds.</p>
+    <section id="pending" class="status-card" hidden>
+      <p class="status-label">Payment status</p>
+      <span class="badge">Pending</span>
+      <h1>Payment pending</h1>
+      <p>
+        We've received your payment attempt. We're waiting for Paystack to
+        confirm it. Bank transfers and USSD payments can take a few minutes.
+      </p>
+      <p class="ref-line">Transaction reference: <strong id="pending-ref"></strong></p>
+
+      <div class="tips">
+        <p class="tips-title">Please note</p>
+        <ul>
+          <li><strong>Don't pay a second time</strong> just because confirmation is delayed.</li>
+          <li>Wait a little and press <strong>Check again</strong>. This page also checks automatically.</li>
+          <li>
+            If payment stays pending, contact us with your transaction reference:
+            <a href="tel:+2348034736487">+234 803 473 6487</a> (Abu Nasrullah) or
+            <a href="tel:+2348076860528">+234 807 686 0528</a> (Faaruq).
+          </li>
+        </ul>
+      </div>
+
+      <p class="auto-note" id="pending-text" aria-live="polite"></p>
       <div class="actions">
         <button class="btn" type="button" id="retry">Check again</button>
-        <a class="btn btn-ghost" href="/#register">Back to registration</a>
       </div>
+      <p class="restart">Cancelled or didn't finish paying? <a href="/#register">Register again</a></p>
     </section>
 
     <section id="failed" class="state" hidden>
@@ -62,8 +83,8 @@
       <div class="paid-banner">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2Z"/></svg>
         <div>
-          <h1>Registration Confirmed</h1>
-          <p>Jazakumullahu khayran, <span id="r-payer"></span>. See you at camp, in shaa Allah!</p>
+          <h1>Payment Successful!</h1>
+          <p>Your registration has been received. Jazakumullahu khayran, <span id="r-payer"></span>. See you at camp, in shaa Allah!</p>
         </div>
       </div>
 
@@ -84,7 +105,7 @@
         </tfoot>
       </table>
 
-      <p class="r-note">Please keep your Registration ID(s). You may be asked for them at the camp.</p>
+      <p class="r-note"><strong>Please print or screenshot this receipt now.</strong> Your Registration ID(s) will be required at the camp.</p>
 
       <div class="actions no-print">
         <button class="btn" type="button" onclick="window.print()">Print / Save receipt</button>

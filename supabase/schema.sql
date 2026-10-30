@@ -73,6 +73,11 @@ begin
 end;
 $$;
 
+-- Earlier versions issued JDM28- IDs; convert any of those to JDM26-.
+update public.participants
+   set reg_code = 'JDM26-' || substr(reg_code, 7)
+ where reg_code like 'JDM28-%';
+
 revoke execute on function public.mark_paid(text, bigint) from public, anon, authenticated;
 grant execute on function public.mark_paid(text, bigint) to service_role;
 

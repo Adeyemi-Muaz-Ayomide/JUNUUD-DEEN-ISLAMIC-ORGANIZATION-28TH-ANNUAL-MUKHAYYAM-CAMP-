@@ -2,7 +2,7 @@ import { CATEGORY_LABELS, EARLY_BIRD_ENDS, PRICES, currentTier, naira, quote } f
 import { MAX_PARTICIPANTS, validateParticipant } from '/lib/validation.js';
 
 const FIELDS = [
-  'full_name', 'email', 'phone', 'gender', 'category',
+  'first_name', 'last_name', 'email', 'phone', 'gender', 'category',
   'emergency_name', 'emergency_phone', 'emergency_relationship', 'medical_notes',
 ];
 
@@ -143,7 +143,11 @@ list.addEventListener('input', (e) => {
 });
 
 list.addEventListener('change', (e) => {
-  if (e.target.name === 'category') updateSummary();
+  if (e.target.name === 'category') {
+    const note = e.target.parentElement.querySelector('.cat-note');
+    note.hidden = e.target.value !== 'others';
+    updateSummary();
+  }
   if (e.target.tagName === 'SELECT') validateCard(e.target.closest('.participant'), e.target.name);
 });
 

@@ -22,7 +22,7 @@ create table if not exists public.registrations (
 create table if not exists public.participants (
   id bigint generated always as identity primary key,
   registration_id bigint not null references public.registrations (id) on delete cascade,
-  reg_code text unique,            -- e.g. JDM28-0001, assigned once payment is confirmed
+  reg_code text unique,            -- e.g. JDM26-0001, assigned once payment is confirmed
   full_name text not null,
   email text,
   phone text,
@@ -67,7 +67,7 @@ begin
 
   for r in select id from participants where registration_id = v_id order by id loop
     update participants
-       set reg_code = 'JDM28-' || lpad(nextval('reg_code_seq')::text, 4, '0')
+       set reg_code = 'JDM26-' || lpad(nextval('reg_code_seq')::text, 4, '0')
      where id = r.id;
   end loop;
 end;

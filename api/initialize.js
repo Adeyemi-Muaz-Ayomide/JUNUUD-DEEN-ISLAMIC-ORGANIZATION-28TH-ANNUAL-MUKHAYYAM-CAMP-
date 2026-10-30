@@ -32,7 +32,7 @@ export async function POST(request) {
 
   const q = quote(participants.map((p) => p.category));
   const payer = participants[0];
-  const reference = 'JDM28-' + randomBytes(6).toString('hex').toUpperCase();
+  const reference = 'JDM26-' + randomBytes(6).toString('hex').toUpperCase();
 
   try {
     const [reg] = await db('registrations', {

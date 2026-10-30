@@ -64,7 +64,9 @@ function renumber() {
       el.textContent = i === 0 ? '' : '(optional)';
     });
   });
-  addBtn.disabled = cards.length >= MAX_PARTICIPANTS;
+  const full = cards.length >= MAX_PARTICIPANTS;
+  addBtn.disabled = full;
+  addBtn.textContent = full ? `Maximum of ${MAX_PARTICIPANTS} participants` : '+ Add another participant';
   updateSummary();
 }
 

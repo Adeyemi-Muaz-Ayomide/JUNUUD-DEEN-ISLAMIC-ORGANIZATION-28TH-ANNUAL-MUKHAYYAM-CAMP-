@@ -330,7 +330,7 @@ textarea:focus-visible {
   font-weight: 900;
   text-transform: uppercase;
   font-size: clamp(1.4rem, 4vw, 2.2rem);
-  color: var(--cream);
+  color: #fff;
   letter-spacing: -0.02em;
 }
 .fee-row {
@@ -369,7 +369,7 @@ textarea:focus-visible {
 .fees-note {
   margin: 1.2rem 0 0;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.85);
+  color: #fff;
   font-size: 0.95rem;
 }
 
@@ -604,6 +604,7 @@ footer {
   gap: 0.6rem 2rem;
   flex-wrap: wrap;
   font-weight: 700;
+  color: var(--ink);
 }
 .socials a {
   text-decoration: none;

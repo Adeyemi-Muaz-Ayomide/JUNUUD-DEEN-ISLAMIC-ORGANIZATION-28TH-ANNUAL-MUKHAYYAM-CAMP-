@@ -5,7 +5,7 @@ import { confirmPayment, json } from './_lib.js';
 
 export async function GET(request) {
   const reference = new URL(request.url).searchParams.get('reference') || '';
-  if (!/^JDM28-[0-9A-F]{12}$/.test(reference)) {
+  if (!/^JDM2[68]-[0-9A-F]{12}$/.test(reference)) {
     return json({ error: 'Invalid payment reference.' }, 400);
   }
 

@@ -8,10 +8,11 @@ function show(id) {
   for (const s of states) document.getElementById(s).hidden = s !== id;
 }
 
-function td(text, className) {
+function td(text, className, label) {
   const cell = document.createElement('td');
   cell.textContent = text;
   if (className) cell.className = className;
+  if (label) cell.dataset.label = label;
   return cell;
 }
 
@@ -26,7 +27,12 @@ function renderReceipt(data) {
   rows.replaceChildren(
     ...data.participants.map((p) => {
       const tr = document.createElement('tr');
-      tr.append(td(p.reg_code, 'code'), td(p.full_name), td(CATEGORY_LABELS[p.category]), td(naira(p.price), 'num'));
+      tr.append(
+        td(p.reg_code, 'code', 'Reg. ID'),
+        td(p.full_name, '', 'Name'),
+        td(CATEGORY_LABELS[p.category], '', 'Category'),
+        td(naira(p.price), 'num', 'Fee')
+      );
       return tr;
     })
   );

@@ -84,6 +84,20 @@ Settings → API Keys & Webhooks → **Test Webhook URL** → `https://YOUR-SITE
 7. Make one real payment yourself to confirm, then refund it from Paystack → Transactions if you
    wish (refunds are not reflected in the database; delete that row manually).
 
+## Live test with a small amount
+
+To try a real payment without paying the full fee, add these in Vercel → Settings → Environment
+Variables, then redeploy:
+
+| Name               | Value                                   |
+| ------------------ | --------------------------------------- |
+| `TEST_PAYER_EMAIL` | your own email address                  |
+| `TEST_PRICE_NAIRA` | `100` (optional; ₦100 is the default)   |
+
+Register with that email as Participant 1 and Paystack will charge ₦100 per participant. The form
+still displays the normal price; Paystack and the receipt show ₦100. Every other email pays the
+normal price. Delete both variables (and redeploy) when you are done, then delete the test rows.
+
 ## Viewing registrations
 
 Supabase → **Table Editor** → `paid_participants` shows everyone who has paid, with their

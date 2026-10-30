@@ -30,8 +30,19 @@ export async function POST(request) {
     return json({ error: 'Please correct the highlighted fields.', fieldErrors: errors }, 400);
   }
 
-  const q = quote(participants.map((p) => p.category));
   const payer = participants[0];
+  const q = quote(participants.map((p) => p.category));
+  let priceFor = (category) => PRICES[q.tier][category];
+
+  // Live test mode: when TEST_PAYER_EMAIL is set in Vercel, that one email (the organiser's)
+  // pays TEST_PRICE_NAIRA (default ₦100) per participant. Everyone else pays the normal price.
+  const testEmail = (process.env.TEST_PAYER_EMAIL || '').trim().toLowerCase();
+  if (testEmail && payer.email === testEmail) {
+    const testPrice = Number(process.env.TEST_PRICE_NAIRA) || 100;
+    priceFor = () => testPrice;
+    q.subtotal = q.total = testPrice * participants.length;
+    q.fee = 0;
+  }
   const reference = 'JDM26-' + randomBytes(6).toString('hex').toUpperCase();
 
   try {
@@ -58,7 +69,7 @@ export async function POST(request) {
         email: p.email || null,
         phone: p.phone || null,
         medical_notes: p.medical_notes || null,
-        price: PRICES[q.tier][p.category],
+        price: priceFor(p.category),
         registration_id: reg.id,
       })),
     });
